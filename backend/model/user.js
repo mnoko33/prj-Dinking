@@ -10,8 +10,11 @@ const userSchema = new Schema({
     last: String,
     continuous: Number,
     rank: String,
-    history: Array,
-    problem_set: Array,
+    threshold: Number,
+    nextRank: mongoose.ObjectId,
+    rank_history: Array,
+    boj_problem_set: Array,
+    badge: Array
 },
     {
         versionKey: false

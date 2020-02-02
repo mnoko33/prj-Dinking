@@ -58,22 +58,22 @@ nodeJS의 표준 서버 프레임워크로 인정받고 있는 `express` 를 이
 
 ### User
 
-|    field     |   type   | example                                         |
-| :----------: | :------: | :---------------------------------------------- |
-|     _id      | ObjectId | 5e36806e6693471c4c94a116                        |
-|    email     |  String  | mnoko@kakao.com                                 |
-|   password   |  String  | abcd1234                                        |
-|   nickName   |  String  | mnoko                                           |
-|   profile    |  String  | https://faculty.nps.edu/dl/ced3/img/team/NO.png |
-|    score     |  Number  | 0                                               |
-|     last     |  String  | 20190201                                        |
-|  continuous  |  Number  | 0                                               |
-|     rank     |  String  | unranked                                        |
-|  threshold   |  Number  | 1                                               |
-|   nextRank   | ObjectId | 4e36806e6693422c4c94a116                        |
-| problem_set  |  Array   | [ { _id, pb_id, pb_name, pb_difficulty  } ]     |
-| rank_history |  Array   | [ { created_at, score, rank  } ]                |
-|    badge     |  Array   | [ { badgeImg, badgeContent } ]                  |
+|      field      |   type   | example                                         |
+| :-------------: | :------: | :---------------------------------------------- |
+|       _id       | ObjectId | 5e36806e6693471c4c94a116                        |
+|      email      |  String  | mnoko@kakao.com                                 |
+|    password     |  String  | abcd1234                                        |
+|    nickName     |  String  | mnoko                                           |
+|     profile     |  String  | https://faculty.nps.edu/dl/ced3/img/team/NO.png |
+|      score      |  Number  | 0                                               |
+|      last       |  String  | 20190201                                        |
+|   continuous    |  Number  | 0                                               |
+|      rank       |  String  | unranked                                        |
+|    threshold    |  Number  | 1                                               |
+|    nextRank     | ObjectId | 4e36806e6693422c4c94a116                        |
+| boj_problem_set |  Array   | [ { _id, pb_id, pb_name, pb_difficulty  } ]     |
+|  rank_history   |  Array   | [ { created_at, score, rank  } ]                |
+|      badge      |  Array   | [ { badgeImg, badgeContent } ]                  |
 
 
 
@@ -88,6 +88,7 @@ nodeJS의 표준 서버 프레임워크로 인정받고 있는 `express` 를 이
 | pb_success_cnt  |  Number  | 248529                   |
 | pb_success_rate |  Number  | 44.988                   |
 |  pb_difficulty  |  String  | normal                   |
+|    pb_source    |  String  | BOJ                      |
 
 
 
