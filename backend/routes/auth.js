@@ -26,8 +26,8 @@ router.post('/signup', async function (req, res, next) {
     const nickName = req.body.nickName;
 
     // check required data
-    if (!email || !password || !nickName) {
-        const msg = "No" + email ? "" : " email" + password ? "" : " password" + nickName ? "" : " nickName";
+    if (!email || !password || !nickName) {        
+        const msg = "No" + (email ? "" : " email") + (password ? "" : " password") + (nickName ? "" : " nickName");
         return res.json(makeRes(false, "err", msg))
     }
 
@@ -60,14 +60,7 @@ router.post('/signup', async function (req, res, next) {
     const userObj = new User({
         email: email,
         password: password,
-        nickName: nickName,
-        profile: "https://faculty.nps.edu/dl/ced3/img/team/NO.png",
-        score: 0,
-        last: today,
-        continuous: 0,
-        rank: "none",
-        history: [],
-        problem_set: []
+        nickName: nickName
     })
     try {
         const user = await userObj.save();

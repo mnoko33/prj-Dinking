@@ -5,16 +5,16 @@ const userSchema = new Schema({
     email: String,
     password: String,
     nickName: String,
-    profile: String,
-    score: Number,
-    last: String,
-    continuous: Number,
-    rank: String,
-    threshold: Number,
-    nextRank: mongoose.ObjectId,
-    rank_history: Array,
-    boj_problem_set: Array,
-    badge: Array
+    profile: { type: String, default: "https://faculty.nps.edu/dl/ced3/img/team/NO.png" },
+    score: { type: Number, default: 0 },
+    last: { type: Date, default: Date.now() },
+    continuous: { type: Number, default: 0 },
+    rank: { type: String, default: "Unranked" },
+    threshold: { type: Number, default: 1 },
+    nextRank: Schema.Types.ObjectId,
+    rank_history: { type: Array, default: [] },
+    boj_problem_set: { type: Array, default: [] },
+    badge:{ type: Array, default: [] }
 },
     {
         versionKey: false

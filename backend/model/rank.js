@@ -6,7 +6,7 @@ const rankSchema = new Schema({
     rankMark: Number,
     rankImg: String,
     threshold: Number,
-    nextRank: mongoose.ObjectId,
+    nextRank: { type: Schema.Types.Mixed, default: null },
 },
     {
         versionKey: false
