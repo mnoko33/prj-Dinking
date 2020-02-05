@@ -66,7 +66,7 @@ nodeJS의 표준 서버 프레임워크로 인정받고 있는 `express` 를 이
 |    nickName     |  String  | mnoko                                           |
 |     profile     |  String  | https://faculty.nps.edu/dl/ced3/img/team/NO.png |
 |      score      |  Number  | 0                                               |
-|      last       |  String  | 20190201                                        |
+|      last       |   Date   | 2020-02-03T10:32:40.588Z                        |
 |   continuous    |  Number  | 0                                               |
 |      rank       |  String  | unranked                                        |
 |    threshold    |  Number  | 1                                               |
@@ -98,7 +98,6 @@ nodeJS의 표준 서버 프레임워크로 인정받고 있는 `express` 를 이
 | --------- | -------- | ----------------------------------------------- |
 | _id       | ObjectId | 4e36806e6693422c4c94a116                        |
 | rankName  | String   | unranked                                        |
-| rankMark  | String   | U                                               |
 | rankImg   | String   | https://faculty.nps.edu/dl/ced3/img/team/NO.png |
 | threshold | Number   | 1                                               |
 | nextRank  | ObjectId | 4e36806e6693422c4c94a117                        |
@@ -141,8 +140,8 @@ nodeJS의 표준 서버 프레임워크로 인정받고 있는 `express` 를 이
 
 # TODO
 
-- [ ] `auth/signup` 을 변경된 model에 맞게 수정
-- [ ] `rank` 데이터 넣기
+- [x] `auth/signup` 을 변경된 model에 맞게 수정
+- [x] `rank` 데이터 넣기
 - [ ]  `problem` 데이터 csv로부터 불어와서 저장하기
 - [ ] mongoDB `find-contain` 기능 찾아보기
 - [ ] `rank threshold` 설정하기
