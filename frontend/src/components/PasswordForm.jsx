@@ -8,8 +8,8 @@ class PasswordForm extends Component {
             <form>
                 <input
                     className="form"
-                    type="password" 
-                    placeholder="password" 
+                    type="password"
+                    placeholder="password"
                     value={password}
                     onChange={handlePasswordChange}
                 />
