@@ -1,7 +1,7 @@
 import React from 'react';
 import './sass/SassComponent.scss';
-import Header from './components/Header';
-import Login from './Container/Login';
+import Header from './containers/Header';
+import Login from './pages/Login';
 
 function App() {
   return (
