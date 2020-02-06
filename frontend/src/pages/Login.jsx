@@ -4,7 +4,9 @@ import PasswordForm from '../components/PasswordForm';
 import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
 import Error from '../components/Error';
-import { login } from '../apis/AuthApis';
+import { axiosLogin } from '../apis/AuthApis';
+import { connect } from 'react-redux';
+import { login } from '../modules/auth';
 
 
 class Login extends Component {
@@ -40,15 +42,19 @@ class Login extends Component {
     }
 
     requestLogin = async () => {
-        const res = await login({
+        const user = await axiosLogin({
             email: this.state.email,
             password: this.state.password,
         });
-        if (!res) {
+        console.log(user)
+        if (!user) {
             this.setState({
                 ...this.state,
                 isLoginFailed: true
             })
+        } else {
+            this.props.login(user)
+            // router 이동!
         }
     }
 
@@ -89,11 +95,15 @@ class Login extends Component {
                 <div>
                     <a href="/signup">회원가입</a>
                 </div>
-
-
             </div>
         </div>)
     }
 }
 
-export default Login;
+
+export default connect(
+    null,
+    dispatch => ({
+        login: (user) => dispatch(login(user))
+    })
+)(Login);
