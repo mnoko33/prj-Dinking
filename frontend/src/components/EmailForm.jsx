@@ -5,10 +5,10 @@ class EmailForm extends Component {
         const email = this.props.email
         const handleEmailChange = this.props.handleEmailChange;
         return (
-            <input 
+            <input
                 className="form"
-                type="text" 
-                placeholder="email" 
+                type="text"
+                placeholder="email"
                 value={email}
                 onChange={handleEmailChange}
             />
