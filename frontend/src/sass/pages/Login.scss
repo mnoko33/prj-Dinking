@@ -18,7 +18,7 @@ $DoHyeon: 'Do Hyeon';
         margin: 0 auto;
         > img {
             width: 150px;
-       }
+        }
     }
 
     .form {
@@ -87,7 +87,11 @@ $DoHyeon: 'Do Hyeon';
         width: 400px;
         margin: 10px 30px;
         a {
+            text-decoration: None;
             color: rgb(70, 70, 70);
+        }
+        a:hover {
+            color: rgb(200, 200, 200);
         }
     }
 }

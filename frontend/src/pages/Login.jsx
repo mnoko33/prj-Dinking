@@ -7,7 +7,7 @@ import Error from '../components/Error';
 import { axiosLogin } from '../apis/AuthApis';
 import { connect } from 'react-redux';
 import { login } from '../modules/auth';
-
+import { Link } from "react-router-dom";
 
 class Login extends Component {
     constructor(props) {
@@ -88,12 +88,11 @@ class Login extends Component {
                 content="로그인"
             />
             <div className="link">
-                {/* TODO: react router 로 변경 */}
                 <div>
-                    <a href="/password">비밀번호 찾기</a>
+                    <Link to='/password'>비밀번호 찾기</Link>
                 </div>
                 <div>
-                    <a href="/signup">회원가입</a>
+                    <Link to='/signup'>회원가입</Link>
                 </div>
             </div>
         </div>)
