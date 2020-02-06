@@ -100,7 +100,6 @@ class Login extends Component {
     }
 }
 
-
 export default connect(
     null,
     dispatch => ({
