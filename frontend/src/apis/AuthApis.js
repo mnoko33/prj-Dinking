@@ -16,3 +16,24 @@ export const axiosLogin = async (data) => {
         console.log(err)
     }
 }
+
+export const axiosSignup = async (data) => {
+    try {
+        const res = await axios.post(`${baseUrl}/auth/signup`, data);
+        if (res.data.status) {
+            return res.data.data
+        }
+        return
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+
+export const checkDuplicate = async (type, data) => {
+    try {
+        return await axios.get(`${baseUrl}/auth/signup`, { type, data });
+    } catch (err) {
+        console.log(err)
+    }
+}

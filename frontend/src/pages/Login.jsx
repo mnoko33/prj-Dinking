@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Form from '../components/Form';
 import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
-import Error from '../components/Error';
+import Msg from '../components/Msg';
 import { axiosLogin } from '../apis/AuthApis';
 import { connect } from 'react-redux';
 import { login } from '../modules/auth';
@@ -17,6 +17,7 @@ class Login extends Component {
             email: '',
             password: '',
             isAutoSave: false,
+            msg: '',
             isLoginFailed: false
         }
     }
@@ -43,19 +44,23 @@ class Login extends Component {
     }
 
     requestLogin = async () => {
-        const user = await axiosLogin({
-            email: this.state.email,
-            password: this.state.password,
-        });
-        console.log(user)
-        if (!user) {
-            this.setState({
-                ...this.state,
-                isLoginFailed: true
-            })
-        } else {
-            this.props.login(user)
-            // router 이동!
+        try {
+            const user = await axiosLogin({
+                email: this.state.email,
+                password: this.state.password,
+            });
+            if (!user) {
+                this.setState({
+                    ...this.state,
+                    msg: "아이디 또는 패스워드가 일치하지 않습니다"
+                })
+            } else {
+                this.props.login(user)
+                // router 이동!
+            }
+        }
+        catch (err) {
+            console.log(err)
         }
     }
 
@@ -67,21 +72,20 @@ class Login extends Component {
                 </div>
                 <h1 className="loginTitle">알고리즘 뿌시기</h1>
                 <Form  // email form
-                    value={this.email}
+                    value={this.state.email}
                     type="text"
                     placeholder="email"
-                    onChange={this.handleEmailChange}
+                    handleChange={this.handleEmailChange}
                 />
                 <Form  // password form
-                    value={this.password}
+                    value={this.state.password}
                     type="password"
                     placeholder="password"
-                    onChange={this.handlePasswordChange}
+                    handleChange={this.handlePasswordChange}
                 />
-                <Error
+                <Msg
                     className="loginError"
-                    isLoginFailed={this.state.isLoginFailed}
-                    msg="아이디 또는 비밀번호가 일치하지 않습니다"
+                    msg={this.state.msg}
                 />
                 <Checkbox
                     className="isAutoSave"
@@ -89,7 +93,7 @@ class Login extends Component {
                     label={this.state.isAutoSave ? "이제 자동으로 로그인할 수 있어요!" : "아이디를 기억할까요?"}
                 />
                 <Button
-                    name="loginBtn"
+                    className="loginBtn"
                     f={this.requestLogin}
                     content="로그인"
                 />
