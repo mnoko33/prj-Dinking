@@ -17,6 +17,7 @@ class Login extends Component {
             email: '',
             password: '',
             isAutoSave: false,
+            msg: '',
             isLoginFailed: false
         }
     }
@@ -43,18 +44,23 @@ class Login extends Component {
     }
 
     requestLogin = async () => {
-        const user = await axiosLogin({
-            email: this.state.email,
-            password: this.state.password,
-        });
-        if (!user) {
-            this.setState({
-                ...this.state,
-                isLoginFailed: true
-            })
-        } else {
-            this.props.login(user)
-            // router 이동!
+        try {
+            const user = await axiosLogin({
+                email: this.state.email,
+                password: this.state.password,
+            });
+            if (!user) {
+                this.setState({
+                    ...this.state,
+                    msg: "아이디 또는 패스워드가 일치하지 않습니다"
+                })
+            } else {
+                this.props.login(user)
+                // router 이동!
+            }
+        }
+        catch (err) {
+            console.log(err)
         }
     }
 
@@ -72,15 +78,14 @@ class Login extends Component {
                     handleChange={this.handleEmailChange}
                 />
                 <Form  // password form
-                    value={this.password}
+                    value={this.state.password}
                     type="password"
                     placeholder="password"
-                    handleChange={this.state.handlePasswordChange}
+                    handleChange={this.handlePasswordChange}
                 />
                 <Msg
                     className="loginError"
-                    condition={this.state.isLoginFailed}
-                    msg="아이디 또는 비밀번호가 일치하지 않습니다"
+                    msg={this.state.msg}
                 />
                 <Checkbox
                     className="isAutoSave"
