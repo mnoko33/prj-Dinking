@@ -7,6 +7,8 @@ $DoHyeon: 'Do Hyeon';
 
 
 .login {
+    max-width: 460px;
+    width: 80%;
     border: 0;
     position: absolute;
     top: 50%;
@@ -14,20 +16,23 @@ $DoHyeon: 'Do Hyeon';
     transform: translate(-50%, -50%);
 
     .logo {
-        width: 200px;
+        max-width: 180px;
+        width:50%;
         margin: 0 auto;
         > img {
-            width: 150px;
+            max-width: 150px;
+            width: 80%
         }
     }
 
     .form {
         font-size: 17px;
-        width: 400px;
+        max-width: 400px;
+        width: 90%;
         height: 50px;
         border: 0;
         border-radius: 5px;
-        margin: 10px 30px;
+        margin: 10px 5%;
         padding: 25px;
         background-color: rgb(94, 94, 94);
         color: white;
@@ -41,11 +46,12 @@ $DoHyeon: 'Do Hyeon';
     }
 
     .loginBtn {
-        width: 400px;
+        max-width: 400px;
+        width: 90%;
         height: 50px;
         border: 0;
         border-radius: 5px;
-        margin: 0 30px;
+        margin: 0 5%;
         font-size: 17px;
         background-color: $main;
     }
@@ -84,8 +90,9 @@ $DoHyeon: 'Do Hyeon';
             width: 50%;
             text-align: center;
         }
-        width: 400px;
-        margin: 10px 30px;
+        max-width: 400px;
+        width: 90%;
+        margin: 10px 5%;
         a {
             text-decoration: None;
             color: rgb(70, 70, 70);
