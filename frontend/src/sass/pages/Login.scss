@@ -25,15 +25,16 @@ $DoHyeon: 'Do Hyeon';
         font-size: 17px;
         width: 400px;
         height: 50px;
-        border: 0;
+        border: 3px solid black;
         border-radius: 5px;
-        margin: 10px 30px;
+        margin: 10px calc(50% - 200px);
         padding: 25px;
         background-color: rgb(94, 94, 94);
         color: white;
-        :focus {
-            background-color: black;
-        }
+    }
+
+    input:focus {       
+        outline: none;
     }
 
     ::placeholder {
@@ -45,7 +46,7 @@ $DoHyeon: 'Do Hyeon';
         height: 50px;
         border: 0;
         border-radius: 5px;
-        margin: 0 30px;
+        margin: 0 calc(50% - 200px);
         font-size: 17px;
         background-color: $main;
     }
@@ -64,7 +65,7 @@ $DoHyeon: 'Do Hyeon';
     }
 
     .isAutoSave {
-        margin: 0 30px 40px ;
+        margin: 0 calc(50% - 200px) 40px;
         input {
             margin: 0 7px 0 0;
         }
