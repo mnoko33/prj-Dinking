@@ -16,3 +16,11 @@ export const axiosLogin = async (data) => {
         console.log(err)
     }
 }
+
+export const checkDuplicate = async (type, data) => {
+    try {
+        return await axios.get(`${baseUrl}/auth/signup`, { type, data });
+    } catch (err) {
+        console.log(err)
+    }
+}

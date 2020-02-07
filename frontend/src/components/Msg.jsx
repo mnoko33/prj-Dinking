@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-class Error extends Component {
+class Msg extends Component {
     render() {
-        if (this.props.isLoginFailed) {
+        if (this.props.condition) {
             return <div className={this.props.className}>{this.props.msg}</div>;
         }
         return null;
@@ -10,4 +10,4 @@ class Error extends Component {
 }
 
 
-export default Error
+export default Msg
