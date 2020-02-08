@@ -8,6 +8,7 @@ import { axiosSignup } from '../apis/AuthApis';
 import { connect } from 'react-redux';
 import { login } from '../modules/auth';
 
+
 class Signup extends Component {
     constructor(props) {
         super(props)
@@ -167,10 +168,6 @@ class Signup extends Component {
             this.setState({ nickNameMsg: "닉네임은 필수입니다" })
         }
         console.log(this.state.nickName)
-    }
-
-    tmp = (e) => {
-        console.log(e)
     }
 
     render() {

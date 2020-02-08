@@ -9,9 +9,11 @@ $DoHyeon: 'Do Hyeon';
 * {
     font-family: $DoHyeon;
     color: white;
-    background-color: black;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: $DoHyeon;
+}
+
+body {
+    background-color: black;
 }
