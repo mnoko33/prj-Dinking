@@ -33,11 +33,8 @@ export const axiosSignup = async (data) => {
 export const checkDuplicate = async (type, data) => {
     try {
         const res = await axios.get(`${baseUrl}/auth/signup`, {
-            params: { 
-                type: type,
-                data: data 
-            }
-        }); 
+            params: { type, data }
+        });
         return res.data.status
     } catch (err) {
         console.log(err)
