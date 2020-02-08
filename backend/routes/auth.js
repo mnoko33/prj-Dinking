@@ -88,7 +88,7 @@ router.post('/login', async function(req, res, next) {
 router.get('/signup', async function(req, res, next) {
     const type = req.query.type;
     const data = req.query.data;
-    
+
     if (type === "email") {
         const user = await User.findOne({ email: data });
         if (user) {
