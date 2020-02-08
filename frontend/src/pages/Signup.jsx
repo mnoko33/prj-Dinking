@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Checkbox from '../components/Checkbox';
 import Form from '../components/Form';
 import Button from '../components/Button';
-// import { checkDuplicate } from '../apis/AuthApis';
+import { checkDuplicate } from '../apis/AuthApis';
 import Msg from '../components/Msg';
 import { axiosSignup } from '../apis/AuthApis';
 import { connect } from 'react-redux';
@@ -49,8 +49,8 @@ class Signup extends Component {
                 emailMsg: "올바른 이메일 형식이 아닙니다"
             })
         } else {
-            // const isDuplicated = await checkDuplicate("email", this.state.email);
-            const isDuplicated = true;
+            const isDuplicated = await checkDuplicate("email", this.state.email);
+            // const isDuplicated = true;
             if (isDuplicated) {
                 this.setState({
                     ...this.state,
@@ -115,8 +115,9 @@ class Signup extends Component {
                 nickNameMsg: ''
             })
         }
-        // const isDuplicated = await checkDuplicate("nickName", this.state.nickName);
-        const isDuplicated = true;
+        const isDuplicated = await checkDuplicate("nickName", this.state.nickName);
+        console.log(isDuplicated);
+        // const isDuplicated = true;
         if (isDuplicated) {
             this.setState({
                 ...this.state,
