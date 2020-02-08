@@ -86,31 +86,23 @@ router.post('/login', async function(req, res, next) {
     return res.json(makeRes(false, "err", "there is no such user match with those infos"))
 })
 
-// check email is duplicated 
-// if email is duplicated, return true
-router.get('/email', async function(req, res, next) {
-    const email = req.query.email;
-    const user = await User.findOne({email: email});
-    if (user) {
-        return res.json(makeRes(true, "err", "email is already used"))
+router.get('/signup', async function(req, res, next) {
+    const type = req.params.type;
+    const data = req.params.data;
+    if (type === "email") {
+        const user = await User.findOne({ email: data });
+        if (user) {
+            return res.json(makeRes(true, "err", "email is already used"))
+        }
+        return res.json(makeRes(false, "err", "this email is possible"))
     }
-    return res.json(makeRes(false, "err", "this email is possible"))
+    if (type === "nickName") {
+        const user = await User.findOne({nickName: data});
+        if (user) {
+            return res.json(makeRes(true, "err", "nickName is already used"))
+        }
+        return res.json(makeRes(false, "err", "this nickName is possible"))
+    } 
 })
-
-// check nickName is duplicated 
-// if nickName is duplicated, return true
-router.get('/nickName', async function(req, res, next) {
-    const nickName = req.query.nickName;  // I don't know why req.params.nickName does not work
-    // TODO: make function that makes random nickname
-    // if (isRandom) {
-    //     // craete random nick name
-    // }
-    const user = await User.findOne({nickName: nickName});
-    if (user) {
-        return res.json(makeRes(true, "err", "nickName is already used"))
-    }
-    return res.json(makeRes(false, "err", "this nickName is possible"))
-})
-
 
 module.exports = router;
