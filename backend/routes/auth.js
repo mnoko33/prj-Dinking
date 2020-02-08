@@ -33,7 +33,6 @@ router.post('/signup', async function (req, res, next) {
 
     // check regex of email and password
     if (!emailRegex(email)) {
-        console.log('email regex err')
         return res.json(makeRes(false, "err", "email regex"))
     }
 
@@ -87,8 +86,9 @@ router.post('/login', async function(req, res, next) {
 })
 
 router.get('/signup', async function(req, res, next) {
-    const type = req.params.type;
-    const data = req.params.data;
+    const type = req.query.type;
+    const data = req.query.data;
+    
     if (type === "email") {
         const user = await User.findOne({ email: data });
         if (user) {
