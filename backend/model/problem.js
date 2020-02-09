@@ -9,6 +9,7 @@ const problemSchema = new Schema({
     pb_trial_cnt: Number,
     pb_success_rate: Number,
     pb_difficulty: String,
+    pb_score: Number,
 },
     {
         versionKey: false
