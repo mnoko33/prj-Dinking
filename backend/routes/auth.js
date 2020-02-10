@@ -26,30 +26,29 @@ router.post('/signup', async function (req, res, next) {
     const nickName = req.body.nickName;
 
     // check required data
-    if (!email || !password || !nickName) {        
+    if (!email || !password || !nickName) {
         const msg = "No" + (email ? "" : " email") + (password ? "" : " password") + (nickName ? "" : " nickName");
-        return res.json(makeRes(false, "err", msg))
+        return res.json({ status: false, err: msg })
     }
 
     // check regex of email and password
     if (!emailRegex(email)) {
-        return res.json(makeRes(false, "err", "email regex"))
+        return res.json({ status: false, err: "email regex" })
     }
-
     if (!passwordRegex(password)) {
-        return res.json(makeRes(false, "err", "password regex"))
+        return res.json({ status: false, err: "email regex" })
     }
 
     // check email and nickName is already exist
-    let user = await User.findOne({email: email});
+    let user = await User.findOne({ email: email });
     if (user) {
-        return res.json(makeRes(false, "err", "email is already exist"))
-    }   
+        return res.json({ status: false, err: "email duplication" })
+    }
 
-    user = await User.findOne({nickName: nickName});
+    user = await User.findOne({ nickName: nickName });
     if (user) {
-        return res.json(makeRes(false, "err", "nickName is already exist"))
-    }   
+        return res.json({ status: false, err: "nickName duplication" })
+    }
 
     // make today string
     let today = (new Date).toString().split(' ')
@@ -63,46 +62,34 @@ router.post('/signup', async function (req, res, next) {
     })
     try {
         const user = await userObj.save();
-        return res.json(makeRes(true, "user", user))
+        return res.json({ status: true, user })
     }
-    catch {
-        return res.json(makeRes(false, "err", "there is some error when creating user"))
+    catch (err) {
+        return res.json({ status: false, err })
     }
 })
 
 // loogin
-router.post('/login', async function(req, res, next) {
+router.post('/login', async function (req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
 
-    const user = await User.findOne({
-        email: email,
-        password: password
-    })
-    if (user) {
-        return res.json(makeRes(true, "user", user))
-    }
-    return res.json(makeRes(false, "err", "there is no such user match with those infos"))
+    const user = await User.findOne({ email, password })
+    return res.json({ status: true, user })
 })
 
-router.get('/signup', async function(req, res, next) {
+router.get('/signup', async function (req, res, next) {
     const type = req.query.type;
     const data = req.query.data;
-    
+
     if (type === "email") {
         const user = await User.findOne({ email: data });
-        if (user) {
-            return res.json(makeRes(true, "err", "email is already used"))
-        }
-        return res.json(makeRes(false, "err", "this email is possible"))
+        return res.json({ status: true, isDuplicated: !!user })
     }
     if (type === "nickName") {
-        const user = await User.findOne({nickName: data});
-        if (user) {
-            return res.json(makeRes(true, "err", "nickName is already used"))
-        }
-        return res.json(makeRes(false, "err", "this nickName is possible"))
-    } 
+        const user = await User.findOne({ nickName: data });
+        return res.json({ status: true, isDuplicated: !!user })
+    }
 })
 
 module.exports = router;

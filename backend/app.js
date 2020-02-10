@@ -8,7 +8,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const usersRouter = require('./routes/users');
-const userRouter = require('./routes/user');
 const authRouter = require('./routes/auth');
 const rankRouter = require('./routes/rank');
 const problemsRouter = require('./routes/problems')
@@ -31,7 +30,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/users', usersRouter);
-app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/rank', rankRouter);
 app.use('/api/problems', problemsRouter);

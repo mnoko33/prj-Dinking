@@ -3,7 +3,7 @@ const router = express.Router();
 const Problem = require('../model/problem');
 const fs = require('fs');
 
-const get_diff_and_score = function(pbtcnt, pbsrate) {
+const get_diff_and_score = function (pbtcnt, pbsrate) {
     if (pbtcnt < 1000) {
         return { "pb_difficulty": "Lack Of Sample", "pb_score": 100 - pbsrate }
     }
@@ -28,7 +28,8 @@ const get_diff_and_score = function(pbtcnt, pbsrate) {
     return { "pb_difficulty": "Hell", "pb_score": 50000 }
 }
 
-router.post('/', async function(req, res, next) {
+// insert data into DB
+router.post('/', async function (req, res, next) {
     fs.readFile('./backjoon.csv', 'utf8', function (err, data) {
         let dataArray = data.split(/\r?\n/);
         dataArray.forEach(async data => {
@@ -38,12 +39,12 @@ router.post('/', async function(req, res, next) {
             const pb_name = data[1]
             const pb_trial_cnt = data[2] * 1
             const pb_success_cnt = data[3] * 1
-            const pb_success_rate= (data[4].slice(0, -1)) * 1 
-            const {pb_difficulty, pb_score } = get_diff_and_score(pb_trial_cnt, pb_success_rate);
+            const pb_success_rate = (data[4].slice(0, -1)) * 1
+            const { pb_difficulty, pb_score } = get_diff_and_score(pb_trial_cnt, pb_success_rate);
             const pb_source = "BOJ"
             try {
                 await Problem.create({ pb_id, pb_name, pb_trial_cnt, pb_success_cnt, pb_difficulty, pb_score, pb_source })
-            } catch(err) {
+            } catch (err) {
                 console.log(err)
             }
         })
@@ -53,24 +54,26 @@ router.post('/', async function(req, res, next) {
     })
 })
 
-router.get('/', async function(req, res, next) {
-    Problem.find(function(err, problems) {
+// 모든 문제
+router.get('/', async function (req, res, next) {
+    Problem.find(function (err, problems) {
         if (err) {
-            res.json({status: false, err})
+            res.json({ status: false, err })
         } else {
-            res.json({status: true, problems})
+            res.json({ status: true, problems })
         }
     })
 })
 
-router.get('/:type/:content', async function(req, res, next){
+// 문제 찾기
+router.get('/:type/:content', async function (req, res, next) {
     try {
         const type = req.params.type;
         const content = req.params.content;
-        const problem = type === "pb_id" ? await Problem.find({pb_id: content}) : await Problem.find({pb_name: content});
+        const problem = type === "pb_id" ? await Problem.find({ pb_id: content }) : await Problem.find({ pb_name: content });
         res.json({ status: true, problem })
-    } catch (err) { 
-        res.json({ status: false, problem })
+    } catch (err) {
+        res.json({ status: false, err })
     }
 })
 

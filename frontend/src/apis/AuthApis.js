@@ -4,13 +4,9 @@ import axios from 'axios'
 const baseUrl = 'http://localhost:8080/api'
 
 export const axiosLogin = async (data) => {
-    // return true
     try {
         const res = await axios.post(`${baseUrl}/auth/login`, data);
-        if (res.data.status) {
-            return res.data.data;
-        }
-        return
+        return res.data.user
     }
     catch (err) {
         console.log(err)
@@ -35,7 +31,7 @@ export const checkDuplicate = async (type, data) => {
         const res = await axios.get(`${baseUrl}/auth/signup`, {
             params: { type, data }
         });
-        return res.data.status
+        return res.data.isDuplicated
     } catch (err) {
         console.log(err)
     }
