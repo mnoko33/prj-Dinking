@@ -24,13 +24,11 @@ router.post('/signup', async function (req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
     const nickName = req.body.nickName;
-
     // check required data
     if (!email || !password || !nickName) {
         const msg = "No" + (email ? "" : " email") + (password ? "" : " password") + (nickName ? "" : " nickName");
         return res.json({ status: false, err: msg })
     }
-
     // check regex of email and password
     if (!emailRegex(email)) {
         return res.json({ status: false, err: "email regex" })
@@ -38,13 +36,11 @@ router.post('/signup', async function (req, res, next) {
     if (!passwordRegex(password)) {
         return res.json({ status: false, err: "email regex" })
     }
-
     // check email and nickName is already exist
     let user = await User.findOne({ email: email });
     if (user) {
         return res.json({ status: false, err: "email duplication" })
     }
-
     user = await User.findOne({ nickName: nickName });
     if (user) {
         return res.json({ status: false, err: "nickName duplication" })
@@ -53,12 +49,12 @@ router.post('/signup', async function (req, res, next) {
     // make today string
     let today = (new Date).toString().split(' ')
     today = today[3] + str2month[today[1]] + today[2];
-
     // signup
     const userObj = new User({
         email: email,
         password: password,
-        nickName: nickName
+        nickName: nickName,
+        nextRank: "5e382d0e82d5ff0718d6339d"
     })
     try {
         const user = await userObj.save();

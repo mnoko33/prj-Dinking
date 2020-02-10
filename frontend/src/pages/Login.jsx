@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import EmailForm from '../components/EmailForm';
-// import PasswordForm from '../components/PasswordForm';
 import Form from '../components/Form';
 import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
@@ -55,8 +53,14 @@ class Login extends Component {
                     msg: "아이디 또는 패스워드가 일치하지 않습니다"
                 })
             } else {
-                this.props.login(user)
-                // router 이동!
+                await this.props.login(user)
+                localStorage.setItem('userInfo', JSON.stringify({
+                    profile: user.profile,
+                    rank: user.rank,
+                    _id: user._id,
+                    nickName: user.nickName
+                }))
+                this.props.history.push('/')
             }
         }
         catch (err) {

@@ -74,61 +74,70 @@ router.get('/:id', function (req, res, next) {
 
 // update problem_set 
 router.patch('/boj_problem_set', async function (req, res, next) {
-	const problemId = req.body.id;
+	const problemId = req.body.problemId;
 	const userId = req.body.userId;
 	// 문제가 여러 개 추가라면 ???
-	const problemObj = await Problem.findById(problemId);
-	const userObj = await User.findById(userId);
-	userObj.boj_problem_set.push(problemObj);
-	userObj.score += WF(problemObj.difficulty, problemObj.pb_score, userObj.continuous)
-	let nextRankObj
-	while (userObj.score < userObj.threshold) {
-		nextRankObj = await Rank.findById(userObj.nextRank);
-		userObj.threshold = nextRankObj.threshold;
-		userObj.nextRank = nextRankObj.nextRank;
+	const problemDoc = await Problem.findById(problemId);
+	const userDoc = await User.findById(userId);
+	userDoc.score += WF(problemDoc.pb_difficulty, problemDoc.pb_score, userDoc.continuous)
+	userDoc.boj_problem_set.push(problemDoc);
+	
+	// await userDoc.save()
+	let nextRankDoc
+
+	while (true) {
+		console.log("score : ", userDoc.score)
+		if (userDoc.score < userDoc.threshold) {
+			break
+		}
+		nextRankDoc = await Rank.findById(userDoc.nextRank);
+		userDoc.threshold = nextRankDoc.threshold;
+		userDoc.nextRank = nextRankDoc.nextRank;
 	}
-	if (nextRankObj) {
-		userObj.rank = nextRankObj.rankName;
-		userObj.rank_history.push({
+	if (nextRankDoc) {
+		userDoc.rank = nextRankDoc.rankName;
+		userDoc.rank_history.push({
 			date: new Date(),
-			rank: userObj.rankName
+			rank: userDoc.rankName
 		})
 	}
 
-	const user = await userObj.save();
-	res.json({ status: true, user })
+	const user = await userDoc.save();
+	// res.json({ status: true, user })
+	res.json({status: true, user})
 })
 
-// problem_set
-router.patch('/boj_problem_set', async function (req, res, next) {
-	const problem_set = req.body.problem_set;
-	const userId = req.body.userId;
-	// 문제가 여러 개 추가라면 ???
-	const problemObj = await Problem.findById(problemId);
-	const userObj = await User.findById(userId);
-	problem_set.forEach(problem => {
-		const problemObj = await Problem.findById(problemId);
+// // problem_set
+// router.patch('/boj_problem_set', async function (req, res, next) {
+// 	const problem_set = req.body.problem_set;
+// 	const userId = req.body.userId;
+	
+// 	// 문제가 여러 개 추가라면 ???
+// 	const problemObj = await Problem.findById(problemId);
+// 	const userObj = await User.findById(userId);
+// 	problem_set.forEach(async problem => {
+// 		const problemObj = await Problem.findById(problemId);
 
-	})
-	userObj.boj_problem_set.push(problemObj);
-	userObj.score += WF(problemObj.difficulty, problemObj.pb_score, userObj.continuous)
-	let nextRankObj
-	while (userObj.score < userObj.threshold) {
-		nextRankObj = await Rank.findById(userObj.nextRank);
-		userObj.threshold = nextRankObj.threshold;
-		userObj.nextRank = nextRankObj.nextRank;
-	}
-	if (nextRankObj) {
-		userObj.rank = nextRankObj.rankName;
-		userObj.rank_history.push({
-			date: new Date(),
-			rank: userObj.rankName
-		})
-	}
+// 	})
+// 	userObj.boj_problem_set.push(problemObj);
+// 	userObj.score += WF(problemObj.difficulty, problemObj.pb_score, userObj.continuous)
+// 	let nextRankObj
+// 	while (userObj.score < userObj.threshold) {
+// 		nextRankObj = await Rank.findById(userObj.nextRank);
+// 		userObj.threshold = nextRankObj.threshold;
+// 		userObj.nextRank = nextRankObj.nextRank;
+// 	}
+// 	if (nextRankObj) {
+// 		userObj.rank = nextRankObj.rankName;
+// 		userObj.rank_history.push({
+// 			date: new Date(),
+// 			rank: userObj.rankName
+// 		})
+// 	}
 
-	const user = await userObj.save();
-	res.json({ status: true, user })
-})
+// 	const user = await userObj.save();
+// 	res.json({ status: true, user })
+// })
 
 
 

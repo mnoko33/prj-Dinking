@@ -76,7 +76,8 @@ class Signup extends Component {
         if (!this.passwordRegex(this.state.password1)) {
             await this.setState({
                 ...this.state,
-                passwordMsg: '비밀번호는 영문과 숫자로 구성된 8-16'
+                passwordMsg: '비밀번호는 영문과 숫자로 구성된 8-16',
+                passwordValidation: false,
             })
         } else {
             await this.setState({
@@ -94,11 +95,13 @@ class Signup extends Component {
             && (this.state.password1 !== this.state.password2)) {
             await this.setState({
                 ...this.state,
-                passwordMsg: "비밀번호가 일치하지 않습니다"
+                passwordMsg: "비밀번호가 일치하지 않습니다",
+                passwordValidation: false,
             })
         } else {
             await this.setState({
                 ...this.state,
+                passwordValidation: true,
                 passwordMsg: ''
             })
         }
@@ -117,7 +120,6 @@ class Signup extends Component {
             })
         }
         const isDuplicated = await checkDuplicate("nickName", this.state.nickName);
-        console.log(isDuplicated);
         // const isDuplicated = true;
         if (isDuplicated) {
             this.setState({
@@ -146,17 +148,17 @@ class Signup extends Component {
     }
 
     requestSignup = async () => {
-        if (this.state.emailValidation
-            && this.state.passwordValidation
-            && this.state.nickNameValidation) {
-            const user = await axiosSignup({
-                email: this.state.email,
-                password1: this.state.password1,
-                nickName: this.state.nickName
-            })
-            this.props.login(user)
-            // router 이동!
-            return
+        if (this.state.emailValidation 
+            && this.state.passwordValidation 
+            && this.state.nickNameValidation 
+            && this.state.TOS) {
+                const user = await axiosSignup({
+                    email: this.state.email,
+                    password: this.state.password1,
+                    nickName: this.state.nickName
+                })
+                this.props.history.push('/login')
+                return
         }
         if (!this.state.emailValidation) {
             this.setState({ emailMsg: "이메일은 필수입니다" })
@@ -167,7 +169,7 @@ class Signup extends Component {
         if (!this.state.nickNameValidation) {
             this.setState({ nickNameMsg: "닉네임은 필수입니다" })
         }
-        console.log(this.state.nickName)
+        alert('TOS!!!')
     }
 
     render() {

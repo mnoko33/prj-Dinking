@@ -70,8 +70,8 @@ router.get('/:type/:content', async function (req, res, next) {
     try {
         const type = req.params.type;
         const content = req.params.content;
-        const problem = type === "pb_id" ? await Problem.find({ pb_id: content }) : await Problem.find({ pb_name: content });
-        res.json({ status: true, problem })
+        const problems = type === "pb_id" ? await Problem.find({ pb_id: content }) : await Problem.find({ pb_name: content });
+        res.json({ status: true, problems })
     } catch (err) {
         res.json({ status: false, err })
     }

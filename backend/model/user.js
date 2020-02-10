@@ -8,7 +8,7 @@ const userSchema = new Schema({
     profile: { type: String, default: "https://faculty.nps.edu/dl/ced3/img/team/NO.png" },
     score: { type: Number, default: 0 },
     last: { type: Date, default: Date.now() },
-    continuous: { type: Number, default: 0 },
+    continuous: { type: Number, default: 1 },
     rank: { type: String, default: "Unranked" },
     threshold: { type: Number, default: 1 },
     nextRank: Schema.Types.ObjectId,
@@ -21,3 +21,4 @@ const userSchema = new Schema({
     });
 
 module.exports = mongoose.model('User', userSchema);
+
