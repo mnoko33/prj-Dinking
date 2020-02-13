@@ -7,6 +7,7 @@ import { checkDuplicate } from '../apis/AuthApis';
 import { axiosSignup } from '../apis/AuthApis';
 import { connect } from 'react-redux';
 import { login } from '../modules/auth';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 // material UI component
 import { Button, TextField, Grid, Checkbox, FormControlLabel } from '@material-ui/core';
@@ -151,117 +152,93 @@ class Signup extends Component {
     }
 
     requestSignup = async () => {
-        if (this.state.emailValidation
-            && this.state.passwordValidation
-            && this.state.nickNameValidation
-            && this.state.TOS) {
-            const user = await axiosSignup({
-                email: this.state.email,
-                password: this.state.password1,
-                nickName: this.state.nickName
-            })
-            this.props.history.push('/login')
-            return user
-        }
-        if (!this.state.emailValidation) {
-            this.setState({ emailMsg: "이메일은 필수입니다" })
-        }
-        if (!this.state.passwordValidation) {
-            this.setState({ passwordMsg: "비밀번호는 필수입니다" })
-        }
-        if (!this.state.nickNameValidation) {
-            this.setState({ nickNameMsg: "닉네임은 필수입니다" })
-        }
-        alert('TOS!!!')
+        console.log(this.state)
+        // if (this.state.emailValidation
+        //     && this.state.passwordValidation
+        //     && this.state.nickNameValidation
+        //     && this.state.TOS) {
+        //     const user = await axiosSignup({
+        //         email: this.state.email,
+        //         password: this.state.password1,
+        //         nickName: this.state.nickName
+        //     })
+        //     this.props.history.push('/login')
+        //     return user
+        // }
+        // if (!this.state.emailValidation) {
+        //     this.setState({ emailMsg: "이메일은 필수입니다" })
+        // }
+        // if (!this.state.passwordValidation) {
+        //     this.setState({ passwordMsg: "비밀번호는 필수입니다" })
+        // }
+        // if (!this.state.nickNameValidation) {
+        //     this.setState({ nickNameMsg: "닉네임은 필수입니다" })
+        // }
+        // alert('TOS!!!')
     }
 
     render() {
         return (
             <div className="signup">
-                <Grid container spacing={3} >
-                    <Grid item xs={12}>
-                        <TextField required label="email" />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField required label="password" type="password" /> 
-                    </Grid>
-                    <Grid item xs={8}>
-                        <TextField required label="confirm password" type="password" /> 
-                    </Grid>
-                    <Grid item xs={8}>
-                        <TextField required label="name" value={this.state.nickName} />
-                    </Grid>
-                    <Grid item xs={8}>
-                        <FormControlLabel 
-                            label={this.state.TOS ? "이제부터 아이디가 저장됩니다!" : "아이디를 저장할까요?"} 
-                            labelPlacement="end"
-                            control={<Checkbox color="primary" onClick={this.handleTosChange} />}
-                        />
-                    </Grid>   
-                    <Grid item xs={12} sm={12}>
-                    <Button variant="outlined" onClick={this.goBack}>취소</Button>
-                        <Button variant="contained" color="primary" onClick={this.requestSignup} >회원가입</Button>
-                    </Grid>    
+                <Grid container direction="column" justify="center" alignItems="stretch">
+                    <TextField
+                        label="Email"
+                        // helperText="Full width!"
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        value={this.state.email}
+                        onChange={this.handleEmailChange}
+                    />
+                    <TextField
+                        label="Password"
+                        // helperText="Full width!"
+                        fullWidth
+                        margin="normal"
+                        type="password"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        value={this.state.password1}
+                        onChange={this.handlePassword1Change}
+                    />
+                    <TextField
+                        label="Password Again"
+                        // helperText="Full width!"
+                        fullWidth
+                        margin="normal"
+                        type="password"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        value={this.state.password2}
+                        onChange={this.handlePassword2Change}
+                    />
+                    <TextField
+                        label="Name"
+                        // helperText="Full width!"
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        value={this.state.nickName}
+                        onChange={this.handleNickChange}
+                    />
                 </Grid>
-                
-                {/* <Form
-                    value={this.state.email}
-                    type="text"
-                    placeholder="email"
-                    handleChange={this.handleEmailChange}
-                />
-                <Msg
-                    className="emailMsg"
-                    msg={this.state.emailMsg}
-                />
-                <br />
-                <Form
-                    value={this.state.password1}
-                    type="password"
-                    placeholder="password"
-                    handleChange={this.handlePassword1Change}
-                />
-
-                <br />
-                <Form
-                    value={this.state.password2}
-                    type="password"
-                    placeholder="confirm password"
-                    handleChange={this.handlePassword2Change}
-                />
-                <br />
-                <Msg
-                    className="passwordMsg"
-                    msg={this.state.passwordMsg}
-                />
-                <br />
-                <Form
-                    value={this.state.nickName}
-                    type="text"
-                    placeholder="nickname"
-                    handleChange={this.handleNickChange}
-                />
-                <Msg
-                    className="nickNameMsg"
-                    msg={this.state.nickNameMsg}
-                />
-                <br />
-                <Checkbox
-                    className="TOS"
-                    label="약관에 동의하시겠습니까?"
-                    f={this.handleTosChange}
-                /> */}
-                {/* <Button
-                    className="signupBtn"
-                    content="회원가입"
-                    f={this.requestSignup}
-                /> */}
-                
-                {/* <Button
-                    className="cancelBtn"
-                    content="취소"
-                    f={this.goBack}
-                /> */}
+                <Grid>
+                    <FormControlLabel
+                        label={this.state.TOS ? "이제부터 아이디가 저장됩니다!" : "아이디를 저장할까요?"}
+                        labelPlacement="end"
+                        control={<Checkbox color="primary" onClick={this.handleTosChange} />}
+                    />
+                </Grid>
+                <Grid container direction="row" justify="flex-end">
+                    <Button variant="text" onClick={this.goBack} style={{ width: 150 }} >취소</Button>
+                    <Button variant="contained" color="primary" onClick={this.requestSignup} style={{ width: 150 }} >회원가입</Button>
+                </Grid>
             </div>)
     }
 }

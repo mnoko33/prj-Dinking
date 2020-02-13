@@ -1,7 +1,18 @@
 $main: rgb(52, 152, 219);
 $main-hovered: rgb(54, 132, 184);
 
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|East+Sea+Dokdo&display=swap');
+$dokdo: 'East Sea Dokdo';
+
 .signup {
+    font-family: $dokdo;
+    max-width: 400px;
+    width: 40%;
+    border: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     .signupBtn {
         background-color: $main;
     }
