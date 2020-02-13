@@ -88,4 +88,24 @@ router.get('/signup', async function (req, res, next) {
     }
 })
 
+// create users - should be deleted
+router.post('/test_create_user', function(req, res, next) {
+    const promises = []
+    for (let i = 0; i <15; i++) {
+        const promise = new Promise((resolve, reject) => {
+            const user = new User({
+                email: `test${i}@naver.com`,
+                password: "qwer1234",
+                nickName: `test${i}`,
+                nextRank: "5e382d0e82d5ff0718d6339d"
+            })
+            user.save()
+            resolve(user)
+        })
+        promises.push(promise)
+    }
+    const result = Promise.all(promises);
+    res.json({result})
+})
+
 module.exports = router;

@@ -5,7 +5,7 @@ const Problem = require('../model/problem');
 const Rank = require('../model/rank');
 
 // 가중치 공식 (Weighting Formular)
-const WF = (difficulty, continuous, score) => {
+const WF = (difficulty, score, continuous) => {
 	switch (difficulty) {
 		case "Lack of Sample":
 			if (continuous < 30) return score + score * continuous / 100
@@ -50,8 +50,6 @@ const WF = (difficulty, continuous, score) => {
 	}
 }
 
-
-
 // find all user
 router.get('/', function (req, res, next) {
 	User.find(function (err, users) {
@@ -81,12 +79,10 @@ router.patch('/boj_problem_set', async function (req, res, next) {
 	const userDoc = await User.findById(userId);
 	userDoc.score += WF(problemDoc.pb_difficulty, problemDoc.pb_score, userDoc.continuous)
 	userDoc.boj_problem_set.push(problemDoc);
-	
-	// await userDoc.save()
+
 	let nextRankDoc
 
 	while (true) {
-		console.log("score : ", userDoc.score)
 		if (userDoc.score < userDoc.threshold) {
 			break
 		}
@@ -98,12 +94,56 @@ router.patch('/boj_problem_set', async function (req, res, next) {
 		userDoc.rank = nextRankDoc.rankName;
 		userDoc.rank_history.push({
 			date: new Date(),
-			rank: userDoc.rankName
+			rank: userDoc.rank
 		})
 	}
 
 	const user = await userDoc.save();
 	res.json({status: true, user})
 })
+
+function getRandomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
+}
+
+router.patch('/test_create_problem_set', async function(req, res, next) {
+	const problemDocs = await Problem.find();
+	const userDocs = await User.find();
+	const promises = userDocs.map(userDoc => {
+		return new Promise(async(resolve) => {
+			for (let i =0; i<3;i++) {
+				const idx = getRandomInt(8000,10000);
+				const problemDoc = problemDocs[idx]
+				userDoc.score += WF(problemDoc.pb_difficulty, problemDoc.pb_score, userDoc.continuous)
+				userDoc.boj_problem_set.push(problemDoc);
+			}
+			let nextRankDoc
+
+			while (true) {
+				if (userDoc.score < userDoc.threshold) {
+					break
+				}
+				nextRankDoc = await Rank.findById(userDoc.nextRank);
+				userDoc.threshold = nextRankDoc.threshold;
+				userDoc.nextRank = nextRankDoc.nextRank;
+			}
+			if (nextRankDoc) {
+				userDoc.rank = nextRankDoc.rankName;
+				userDoc.rank_history.push({
+					date: new Date(),
+					rank: userDoc.rank
+				})
+			}
+
+			await userDoc.save();
+			resolve(userDoc)
+		})
+	})
+	Promise.all(promises)
+	res.json({"good": "good"})
+})
+
 
 module.exports = router;
