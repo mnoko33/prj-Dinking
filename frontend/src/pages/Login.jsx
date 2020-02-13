@@ -3,7 +3,7 @@ import Form from '../components/Form';
 import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
 import Msg from '../components/Msg';
-import { axiosLogin } from '../apis/AuthApis';
+import { axiosLogin } from '../utils/AuthApis';
 import { connect } from 'react-redux';
 import { login } from '../modules/auth';
 import { Link } from "react-router-dom";
@@ -21,50 +21,24 @@ class Login extends Component {
     }
 
     handleEmailChange = (e) => {
-        this.setState({
-            ...this.state,
-            email: e.target.value
-        })
+        this.setState({ email: e.target.value })
     }
 
     handlePasswordChange = (e) => {
-        this.setState({
-            ...this.state,
-            password: e.target.value
-        })
+        this.setState({ password: e.target.value })
     }
 
     handleCheckChange = () => {
-        this.setState({
-            ...this.state,
-            isAutoSave: !this.state.isAutoSave
-        })
+        this.setState({ isAutoSave: !this.state.isAutoSave })
     }
 
     requestLogin = async () => {
-        try {
-            const user = await axiosLogin({
-                email: this.state.email,
-                password: this.state.password,
-            });
-            if (!user) {
-                this.setState({
-                    ...this.state,
-                    msg: "아이디 또는 패스워드가 일치하지 않습니다"
-                })
-            } else {
-                await this.props.login(user)
-                localStorage.setItem('userInfo', JSON.stringify({
-                    profile: user.profile,
-                    rank: user.rank,
-                    _id: user._id,
-                    nickName: user.nickName
-                }))
-                this.props.history.push('/')
-            }
-        }
-        catch (err) {
-            console.log(err)
+        const user = await axiosLogin(this.state.email, this.state.password)
+        if (user) {
+            await this.props.login(user)
+            this.props.history.push('/')
+        } else {
+            this.setState({ msg: "아이디 또는 패스워드가 일치하지 않습니다" })
         }
     }
 
