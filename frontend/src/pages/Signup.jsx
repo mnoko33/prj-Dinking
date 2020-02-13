@@ -148,17 +148,17 @@ class Signup extends Component {
     }
 
     requestSignup = async () => {
-        if (this.state.emailValidation 
-            && this.state.passwordValidation 
-            && this.state.nickNameValidation 
+        if (this.state.emailValidation
+            && this.state.passwordValidation
+            && this.state.nickNameValidation
             && this.state.TOS) {
-                const user = await axiosSignup({
-                    email: this.state.email,
-                    password: this.state.password1,
-                    nickName: this.state.nickName
-                })
-                this.props.history.push('/login')
-                return
+            const user = await axiosSignup({
+                email: this.state.email,
+                password: this.state.password1,
+                nickName: this.state.nickName
+            })
+            this.props.history.push('/login')
+            return user
         }
         if (!this.state.emailValidation) {
             this.setState({ emailMsg: "이메일은 필수입니다" })

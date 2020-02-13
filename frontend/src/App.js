@@ -17,18 +17,18 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch, Router } from 'react-router-dom';
 
 class App extends Component {
-    initializeUser = async () => {
-      const userInfo = await localStorage.getItem('userInfo');
-      if (!userInfo) return;
-      await this.props.login(JSON.parse(userInfo))
-    }
+  initializeUser = async () => {
+    const userInfo = await localStorage.getItem('userInfo');
+    if (!userInfo) return;
+    await this.props.login(JSON.parse(userInfo))
+  }
 
-    componentDidMount() {
-      this.initializeUser();
-    }
+  componentDidMount() {
+    this.initializeUser();
+  }
 
-    render() {
-      return (
+  render() {
+    return (
       <BrowserRouter>
         <div className="app">
           <Switch>
@@ -48,6 +48,6 @@ class App extends Component {
 export default connect(
   null,
   dispatch => ({
-      login: (user) => dispatch(login(user))
+    login: (user) => dispatch(login(user))
   })
 )(App);
