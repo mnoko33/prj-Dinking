@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import Checkbox from '../components/Checkbox';
-import Form from '../components/Form';
-import Button from '../components/Button';
+// import Checkbox from '../components/Checkbox';
+// import Form from '../components/Form';
+// import Button from '../components/Button';
 import { checkDuplicate } from '../apis/AuthApis';
-import Msg from '../components/Msg';
+// import Msg from '../components/Msg';
 import { axiosSignup } from '../apis/AuthApis';
 import { connect } from 'react-redux';
 import { login } from '../modules/auth';
 
+// material UI component
+import { Button, TextField, Grid, Checkbox, FormControlLabel } from '@material-ui/core';
 
 class Signup extends Component {
     constructor(props) {
@@ -141,6 +143,7 @@ class Signup extends Component {
             ...this.state,
             TOS: !this.state.TOS
         })
+        console.log(this.state.TOS)
     }
 
     goBack = () => {
@@ -175,7 +178,33 @@ class Signup extends Component {
     render() {
         return (
             <div className="signup">
-                <Form
+                <Grid container spacing={3} >
+                    <Grid item xs={12}>
+                        <TextField required label="email" />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField required label="password" type="password" /> 
+                    </Grid>
+                    <Grid item xs={8}>
+                        <TextField required label="confirm password" type="password" /> 
+                    </Grid>
+                    <Grid item xs={8}>
+                        <TextField required label="name" value={this.state.nickName} />
+                    </Grid>
+                    <Grid item xs={8}>
+                        <FormControlLabel 
+                            label={this.state.TOS ? "이제부터 아이디가 저장됩니다!" : "아이디를 저장할까요?"} 
+                            labelPlacement="end"
+                            control={<Checkbox color="primary" onClick={this.handleTosChange} />}
+                        />
+                    </Grid>   
+                    <Grid item xs={12} sm={12}>
+                    <Button variant="outlined" onClick={this.goBack}>취소</Button>
+                        <Button variant="contained" color="primary" onClick={this.requestSignup} >회원가입</Button>
+                    </Grid>    
+                </Grid>
+                
+                {/* <Form
                     value={this.state.email}
                     type="text"
                     placeholder="email"
@@ -221,19 +250,18 @@ class Signup extends Component {
                     className="TOS"
                     label="약관에 동의하시겠습니까?"
                     f={this.handleTosChange}
-                />
-                <br />
-                <Button
+                /> */}
+                {/* <Button
                     className="signupBtn"
                     content="회원가입"
                     f={this.requestSignup}
-                />
-                <br />
-                <Button
+                /> */}
+                
+                {/* <Button
                     className="cancelBtn"
                     content="취소"
                     f={this.goBack}
-                />
+                /> */}
             </div>)
     }
 }
