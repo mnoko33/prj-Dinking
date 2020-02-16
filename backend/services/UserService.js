@@ -48,8 +48,8 @@ const WF = (difficulty, score, continuous) => {
 }
 
 module.exports = {
-    // find user by Id
-    findUserById: async (uid) => {
+    // get user by Id
+    getUserById: async (uid) => {
         try { 
             const user = await UserModel.findById(uid) 
         }
@@ -59,8 +59,8 @@ module.exports = {
         return user
     },
 
-    // find all user
-    findAllUsers: async () => {
+    // get all user
+    getAllUsers: async () => {
         try {
             const users = await UserModel.find();
         }

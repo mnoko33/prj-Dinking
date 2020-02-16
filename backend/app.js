@@ -6,10 +6,11 @@ const logger = require('morgan');
 const db = require('./db.js');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+
+// router
 const testRouter = require('./api/routes/test')
 const usersRouter = require('./api/routes/users');
 const authRouter = require('./api/routes/auth');
-// const rankRouter = require('./api/routes/rank');
 // const problemsRouter = require('./api/routes/problems')
 
 const app = express();

@@ -4,14 +4,14 @@ const UserService = require('../../services/UserService')
 
 // find all user
 router.get('/', async function (req, res, next) {
-	const users = await UserService.findAllUsers()
+	const users = await UserService.getAllUsers()
 	res.json({ users })
 })
 
 // find user by ID
 router.get('/:id', async (req, res, next) => {
 	const uid = req.params.id;
-	const user = UserService.findUserById(uid);
+	const user = UserService.getUserById(uid);
 	res.json({ user })
 })
 
