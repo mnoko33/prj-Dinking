@@ -6,11 +6,11 @@ const logger = require('morgan');
 const db = require('./db.js');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
-const usersRouter = require('./routes/users');
-const authRouter = require('./routes/auth');
-const rankRouter = require('./routes/rank');
-const problemsRouter = require('./routes/problems')
+const testRouter = require('./api/routes/test')
+const usersRouter = require('./api/routes/users');
+const authRouter = require('./api/routes/auth');
+// const rankRouter = require('./api/routes/rank');
+// const problemsRouter = require('./api/routes/problems')
 
 const app = express();
 
@@ -31,8 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/rank', rankRouter);
-app.use('/api/problems', problemsRouter);
+app.use('/api/test', testRouter);
+// app.use('/api/rank', rankRouter);
+// app.use('/api/problems', problemsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

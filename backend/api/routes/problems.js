@@ -1,6 +1,6 @@
 // const express = require('express');
 // const router = express.Router();
-// const Problem = require('../model/problem');
+// const Problem = require('../models/problem');
 // const fs = require('fs');
 
 // const get_diff_and_score = function (pbtcnt, pbsrate) {

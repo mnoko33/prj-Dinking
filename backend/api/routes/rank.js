@@ -1,6 +1,6 @@
 // const express = require('express');
 // const router = express.Router();
-// const Rank = require('../model/rank');
+// const Rank = require('../models/rank');
 
 // // create rank sys
 // router.post('/create', async function(req, res, next) {
