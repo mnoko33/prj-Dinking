@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ProblemService = require('../../services/');
+const ProblemService = require('../../services/ProblemService');
 
 // All Problems
 router.get('/', async (req, res, next) => {

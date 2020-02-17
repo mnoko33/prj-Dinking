@@ -52,22 +52,22 @@ module.exports = {
     getUserById: async (uid) => {
         try { 
             const user = await UserModel.findById(uid) 
+            return user
         }
         catch(err) {
             console.log(err)
         }
-        return user
     },
 
     // get all user
     getAllUsers: async () => {
         try {
             const users = await UserModel.find();
+            return users
         }
         catch (err) {
             console.log(err)
         }
-        return users
     },
 
     // update BOJ problem_set
@@ -95,6 +95,12 @@ module.exports = {
         }
 
         return await userDoc.save();
+    },
+
+    // get UserList sorted by score
+    getUserListSortedByScore: async (idx, cnt) => {
+        const userList = await UserModel.find().limit(idx + cnt).sort({score: -1})
+        return userList.slice(idx,idx+cnt+1)
     }
 
 }

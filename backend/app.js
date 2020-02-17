@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const testRouter = require('./api/routes/test')
 const usersRouter = require('./api/routes/users');
 const authRouter = require('./api/routes/auth');
-// const problemsRouter = require('./api/routes/problems')
+const problemsRouter = require('./api/routes/problems')
 
 const app = express();
 
@@ -34,7 +34,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/test', testRouter);
 // app.use('/api/rank', rankRouter);
-// app.use('/api/problems', problemsRouter);
+app.use('/api/problems', problemsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -11,7 +11,7 @@ router.get('/', async function (req, res, next) {
 // find user by ID
 router.get('/:id', async (req, res, next) => {
 	const uid = req.params.id;
-	const user = UserService.getUserById(uid);
+	const user = await UserService.getUserById(uid);
 	res.json({ user })
 })
 
@@ -23,7 +23,12 @@ router.patch('/:id/BOJ_problem_set', async (req, res, next) => {
 	res.json({ user })
 })
 
-// TODO: get user order by rank (scroll)
+router.get('/rank/:idx/:cnt', async (req, res, next) => {
+	const cnt = req.params.cnt * 1 // how many
+	const idx = req.params.idx * 1 // start index
+	const userList = await UserService.getUserListSortedByScore(idx, cnt);
+	res.json({ userList })
+})
 
 
 module.exports = router;
