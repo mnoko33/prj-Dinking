@@ -1,9 +1,4 @@
-$main: rgb(52, 152, 219);
-$main-hovered: rgb(54, 132, 184);
-
-@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|East+Sea+Dokdo&display=swap');
-$dokdo: 'East Sea Dokdo';
-$DoHyeon: 'Do Hyeon';
+@import '../utils.scss';
 
 .NotFound {
     text-align: center;
@@ -11,12 +6,11 @@ $DoHyeon: 'Do Hyeon';
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: $main-font;
     .label {
-        font-family: $DoHyeon;
         font-size: 300px;
     }
     .content {
-        font-family: $DoHyeon;
         font-size: 65px;
     }
 }

@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import '../sass/pages/Page404.scss'
 
 class NotFound extends Component {
     render() {

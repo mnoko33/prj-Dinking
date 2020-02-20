@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import { Table, TableBody, TableContainer, TableRow, TableCell }  from '@material-ui/core'
+import React, { Component } from 'react';
 import { getRanking } from '../utils/RankingApis'
-import { Avatar } from '@material-ui/core';
+
 
 class Home extends Component {
     constructor(props) {
@@ -15,7 +14,7 @@ class Home extends Component {
 
     getRanking = async () => {
         const res = await getRanking(this.state.idx, this.state.limit);
-        this.setState({ 
+        this.setState({
             ranking: [...this.state.ranking, ...res],
             idx: this.state.idx + this.state.limit
         })
@@ -25,28 +24,7 @@ class Home extends Component {
     render() {
         return (
             <div className="home">
-                <TableContainer>
-                    <Table>
-                        <TableBody>
-                            {this.state.ranking.map(user => (
-                                <TableRow key={user._id}>
-                                    <TableCell>
-                                        <Avatar alt="Remy Sharp" src={user.profile} />
-                                    </TableCell>
-                                    <TableCell>
-                                        {user.rank}
-                                    </TableCell>
-                                    <TableCell>
-                                        {user.nickName}
-                                    </TableCell>
-                                    <TableCell>
-                                        {user.score}
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                ss
                 <button onClick={this.getRanking} >click</button>
             </div>
         )

@@ -1,25 +1,54 @@
-$main: rgb(52, 152, 219);
-$main-hovered: rgb(54, 132, 184);
-
-@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|East+Sea+Dokdo&display=swap');
-$dokdo: 'East Sea Dokdo';
+@import '../utils.scss';
 
 .signup {
-    font-family: $dokdo;
-    max-width: 400px;
-    width: 40%;
-    border: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    &.container {
+        max-width: 400px;
+        width: 40%;
+        border: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);       
+    }
+
+    .emailForm, .passwordForm, .nickNameForm {
+        &.input {
+            border: none;
+            border-bottom: 3px solid grey;
+            font-size: 25px;
+            width: 90%;
+            height: 40px;
+            &:focus {
+                outline: none;
+                border-bottom: 3px solid $main-component-color;
+            }
+        }
+        &.label {
+            margin-top: 20px;
+            font-size: 13px;
+            max-width: 400px;
+            width: 90%;
+        }
+    }
+
+    .CheckBox {
+        margin-top: 30px;
+        > .label {
+            margin-left: 10px;
+        }
+    }
+
     .signupBtn {
-        background-color: $main;
-    }
-    .cancelBtn {
-        background-color: $main;
-    }
-    input {
-        color: black;
+        max-width: 400px;
+        height: 40px;
+        width: 90%;
+        margin-top: 20px;
+        background-color: $main-component-color;
+        border: 0;
+        border-radius: 5px;
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
+

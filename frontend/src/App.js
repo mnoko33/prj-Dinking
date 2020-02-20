@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import './sass/default.scss';
-import './sass/pages/Login.scss';
-import './sass/pages/Signup.scss';
-import './sass/pages/Page404.scss';
-import './sass/pages/Mypage.scss';
 import Home from './pages/Home'
 import Login from './pages/Login';
 import Signup from './pages/Signup';

@@ -1,14 +1,10 @@
-$main: rgb(52, 152, 219);
-$main-hovered: rgb(54, 132, 184);
-
-@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|East+Sea+Dokdo&display=swap');
-$dokdo: 'East Sea Dokdo';
-$DoHyeon: 'Do Hyeon';
-
+@import './utils.scss';
 // default setting
+
 * {
-    font-family: $DoHyeon;
-    // color: white;
+    font-family: $main-font;
+    color: $main-color;
+    background-color: $main-background-color;
     margin: 0;
     padding: 0;
     box-sizing: border-box;

@@ -7,6 +7,7 @@ import { axiosLogin } from '../utils/AuthApis';
 import { connect } from 'react-redux';
 import { login } from '../modules/auth';
 import { Link } from "react-router-dom";
+import '../sass/pages/Login.scss';
 
 class Login extends Component {
     constructor(props) {
@@ -44,21 +45,23 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="login">
+            <div className="login container">
                 <div className="logo">
                     <img src="https://cdn.pixabay.com/photo/2014/04/03/00/36/fist-308801_960_720.png" alt="logo" />
                 </div>
                 <h1 className="loginTitle">알고리즘 뿌시기</h1>
                 <Form  // email form
+                    className="emailForm"
+                    label="Email"
                     value={this.state.email}
                     type="text"
-                    placeholder="email"
                     handleChange={this.handleEmailChange}
                 />
                 <Form  // password form
+                    className="passwordForm"
+                    label="Password"
                     value={this.state.password}
                     type="password"
-                    placeholder="password"
                     handleChange={this.handlePasswordChange}
                 />
                 <Msg
@@ -71,7 +74,7 @@ class Login extends Component {
                     label={this.state.isAutoSave ? "이제 자동으로 로그인할 수 있어요!" : "아이디를 기억할까요?"}
                 />
                 <Button
-                    className="loginBtn"
+                    className="Btn loginBtn"
                     f={this.requestLogin}
                     content="로그인"
                 />

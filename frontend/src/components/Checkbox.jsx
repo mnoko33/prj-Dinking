@@ -5,7 +5,7 @@ class Checkbox extends Component {
         return (
             <div className={this.props.className}>
                 <input type="checkbox" onChange={this.props.f} />
-                <label>{this.props.label}</label>
+                <label className="label">{this.props.label}</label>
             </div>
         )
     }

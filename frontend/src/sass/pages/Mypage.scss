@@ -1,14 +1,1 @@
-$main: rgb(52, 152, 219);
-$main-hovered: rgb(54, 132, 184);
-
-.mypage {
-    .Btn {
-        background-color: $main;
-    }
-    .cancelBtn {
-        background-color: $main;
-    }
-    input {
-        color: black;
-    }
-}
+@import '../utils.scss';
