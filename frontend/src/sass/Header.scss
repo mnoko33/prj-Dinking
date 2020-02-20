@@ -1,0 +1,50 @@
+@import './utils.scss';
+
+.header {
+    height: 60px;
+    width: 100%;
+    position: sticky;
+
+    .profile {
+        float: right;
+        margin-top: 25px;
+        margin-right: 50px;
+
+        .userInfo {
+            float: left;
+
+            .Img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                float: left;
+                background-color: red;
+            }
+            .Info {
+                height: 30px;
+                margin-top: -5px;
+                margin-left: 15px;
+                float: left;
+            }
+        }
+
+        .authBtn {
+            margin-left: 25px;
+            float: left;
+            text-decoration: none;
+            &:hover {
+                cursor: pointer;
+                color: $main-component-color;
+                font-weight: 900;
+            }
+            a {
+                text-decoration: none;
+                &:hover {
+                    cursor: pointer;
+                    color: $main-component-color;
+                    font-weight: 900;
+                }
+            }
+        }
+    }
+}

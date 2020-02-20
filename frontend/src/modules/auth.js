@@ -8,7 +8,7 @@ export const login = (user) => ({ type: LOGIN, user });
 export const logout = () => ({type: LOGOUT});
 
 const initialState = {
-    user: {}
+    user: null
 }
 
 // reducer
@@ -27,7 +27,7 @@ function auth(state = initialState, action) {
         case LOGOUT:
             return {
                 ...state,
-                user: {}
+                user: null
             }
         default:
             return state

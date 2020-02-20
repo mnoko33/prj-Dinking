@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import './sass/default.scss';
+
+// compontnt
 import Home from './pages/Home'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Password from './pages/Password';
 import NotFound from './pages/NotFound';
 import Mypage from './pages/Mypage';
+import Header from './containers/Header';
+
 import { login } from './modules/auth';
+// redux
 import { connect } from 'react-redux';
 
 // eslint-disable-next-line
@@ -27,6 +32,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="app">
+          <Header history={this.props.history} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />

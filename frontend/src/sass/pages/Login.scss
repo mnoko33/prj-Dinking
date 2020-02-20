@@ -50,6 +50,9 @@
         font-size: 17px;
         background-color: $main-component-color;
         border-radius: 5px;
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     

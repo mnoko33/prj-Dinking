@@ -24,7 +24,11 @@ class Home extends Component {
     render() {
         return (
             <div className="home">
-                ss
+                <div style={{height:300}}>
+                    {this.state.ranking.map(user=> {
+                        return <div>{user.nickName}</div>
+                    })}
+                </div>
                 <button onClick={this.getRanking} >click</button>
             </div>
         )
